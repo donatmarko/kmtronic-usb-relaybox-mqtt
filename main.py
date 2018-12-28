@@ -5,9 +5,6 @@ __license__ = "GPL-3.0"
 
 import serial
 import time
-import sys
-import json
-import time
 import random
 from config import *
 import paho.mqtt.client as mqtt
