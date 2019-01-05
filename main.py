@@ -5,7 +5,7 @@ __license__ = "GPL-3.0"
 
 import serial
 import time
-import random
+import random 
 from config import *
 import paho.mqtt.client as mqtt
 
@@ -16,7 +16,7 @@ lwt_topic="tele/"+mqtt_topic+"/LWT"     # Birth/Last Will topic name
 cmd_topic="cmnd/"+mqtt_topic+"/POWER"   # Command topic name
 state_topic="stat/"+mqtt_topic+"/POWER" # State topic name
 lwt_online="Online"         # Birth message
-lwt_offline="Offline"       # Last will message
+lwt_offline="Offline"       # Last Will and Testament message
 cmd_on="ON"                 # "On" command          
 cmd_off="OFF"               # "Off" command
 cmd_toggle="TOGGLE"         # "Toggle" command
@@ -79,6 +79,8 @@ def on_disconnect(client, userdata, rc):
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
+    # Publishing retained Birth message
+    client.publish(lwt_topic, lwt_online, 1, True)
     # Subscribing to the necessary amount of command topics
     for i in range(0, relays_count+1):
         topic=cmd_topic+("" if i==0 else str(i))
@@ -120,8 +122,6 @@ relayinit()
 try:
     print("Connecting to MQTT broker: "+mqtt_host)
     client.connect(mqtt_host, mqtt_port, 60)
-    # Publishing retained Birth message
-    client.publish(lwt_topic, lwt_online, 1, True)
     client.loop_forever()
 except KeyboardInterrupt:
     # Publishing retained last will message on exit - normally not being sent on proper discnnection
