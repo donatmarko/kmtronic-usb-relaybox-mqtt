@@ -1,5 +1,5 @@
 __author__ = "Donat Marko"
-__copyright__ = "Copyright 2018, Donatus"
+__copyright__ = "2018 Donat Marko | www.donatus.hu"
 __credits__ = ["Donat Marko"]
 __license__ = "GPL-3.0"
 
