@@ -11,6 +11,11 @@ relays_count=8
 #    Don't use full (e.g. cmnd/kmtronic/POWER) names!
 mqtt_topic="kmtronic"
 
+# Enables MQTT discovery for Home-Assistant to detect the relays automatically
+mqtt_discovery=False
+# Prefix for Home-Assistant MQTT discovery (by default "homeassistant")
+mqtt_discovery_prefix="homeassistant"
+
 # MQTT connection data
 mqtt_host="192.168.0.1"
 mqtt_port=1883
